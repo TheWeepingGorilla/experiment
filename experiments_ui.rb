@@ -167,5 +167,17 @@ def delete_scientist
   gets
 end
 
+def edit_scientist
+  list_scientists
+  puts "Please enter id number of scientist to edit."
+  id_to_edit = gets.chomp.to_i
+  s_to_edit = Scientist.find(id_to_edit)
+  puts "Enter corrected name:"
+  new_name = gets.chomp
+  s_to_edit.update({:name => new_name})
+  puts "Done. Press return to continue."
+  gets
+end
+
 header
 main_menu
