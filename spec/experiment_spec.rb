@@ -11,7 +11,6 @@ describe 'Experiment' do
     experiment1 = Experiment.create({:description => "Shock Test", :location => "Lab 1"})
     experiment1.scientists << new_scientist
     experiment1.scientists << new_scientist2
-    binding.pry
     expect(experiment1.scientists).to eq [new_scientist,new_scientist2]
   end
 end
