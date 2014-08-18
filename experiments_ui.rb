@@ -26,6 +26,8 @@ def main_menu
   puts "AS > Add a scientist"
   puts "DS > Delete a scientist"
   puts "LS > List scientists"
+  puts "ASE > Add scientist to experiment"
+  puts "LSE > List scientist to experiment associations"
   puts "X > Exit"
   choice = gets.chomp.upcase
   case choice
@@ -49,6 +51,10 @@ def main_menu
     list_scientists
     puts "Press return to continue."
     gets
+  when 'ASE'
+    add_scientist_to_experiment
+  when 'LSE'
+    list_associations
   when 'X'
     puts "Have an excellent day!"
     exit
@@ -78,6 +84,7 @@ def add_experiment
 end
 
 def edit_experiment
+  puts "\n"
   list_experiments
   puts "Please enter id number of experiment to edit."
   id_to_edit = gets.chomp.to_i
@@ -175,6 +182,36 @@ def edit_scientist
   puts "Enter corrected name:"
   new_name = gets.chomp
   s_to_edit.update({:name => new_name})
+  puts "Done. Press return to continue."
+  gets
+end
+
+def add_scientist_to_experiment
+  puts "\n"
+  list_experiments
+  puts "Please enter id of experiment."
+  eid_to_assoc = gets.chomp.to_i
+  e_to_associate = Experiment.find(eid_to_assoc)
+  puts "\n"
+  list_scientists
+  puts "Please enter id of scientist to associate."
+  sid_to_assoc = gets.chomp.to_i
+  s_to_associate = Scientist.find(sid_to_assoc)
+  e_to_associate.scientists << s_to_associate
+  puts "Done. Press return to continue."
+  gets
+end
+
+def list_associations
+  puts "\n"
+  list_experiments
+  puts "Please enter id of experiment to see scientists associated with it."
+  eid_to_assoc = gets.chomp.to_i
+  e_to_associate = Experiment.find(eid_to_assoc)
+  e_to_associate.scientists.each do |scientist|
+    puts "#{scientist.id}: #{scientist.name}"
+    puts "\n"
+  end
   puts "Done. Press return to continue."
   gets
 end
