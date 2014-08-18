@@ -22,6 +22,7 @@ def main_menu
   puts "A > Add an experiment"
   puts "D > Delete an experiment"
   puts "L > List experiments"
+  puts "LNS > List experiments with no start time"
   puts "ES > Edit a scientist"
   puts "AS > Add a scientist"
   puts "DS > Delete a scientist"
@@ -39,6 +40,10 @@ def main_menu
     delete_experiment
   when 'L'
     list_experiments
+    puts "Press return to continue."
+    gets
+  when 'LNS'
+    Experiment.no_start.each {|experiment| puts "#{experiment.id}: #{experiment.description}"}
     puts "Press return to continue."
     gets
   when 'ES'
