@@ -22,6 +22,10 @@ def main_menu
   puts "A > Add an experiment"
   puts "D > Delete an experiment"
   puts "L > List experiments"
+  puts "ES > Edit a scientist"
+  puts "AS > Add a scientist"
+  puts "DS > Delete a scientist"
+  puts "LS > List scientists"
   puts "X > Exit"
   choice = gets.chomp.upcase
   case choice
@@ -33,6 +37,16 @@ def main_menu
     delete_experiment
   when 'L'
     list_experiments
+    puts "Press return to continue."
+    gets
+  when 'ES'
+    edit_scientist
+  when 'AS'
+    add_scientist
+  when 'DS'
+    delete_scientist
+  when 'LS'
+    list_scientists
     puts "Press return to continue."
     gets
   when 'X'
@@ -122,6 +136,22 @@ def list_experiments
   Experiment.all.each do |experiment|
     puts "#{experiment.id}: #{experiment.description} at #{experiment.location}"
     puts "Starting at #{experiment.start} and ending at #{experiment.end}."
+    puts "\n"
+  end
+end
+
+def add_scientist
+  puts "Please enter the scientist's name:"
+  e_name = gets.chomp
+  new_scientist = Scientist.create({:name => e_name})
+  puts "Saved!  Press return to continue."
+  gets
+end
+
+def list_scientists
+  puts
+  Scientist.all.each do |scientist|
+    puts "#{scientist.id}: #{scientist.name}"
     puts "\n"
   end
 end
