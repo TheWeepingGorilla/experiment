@@ -142,8 +142,8 @@ end
 
 def add_scientist
   puts "Please enter the scientist's name:"
-  e_name = gets.chomp
-  new_scientist = Scientist.create({:name => e_name})
+  s_name = gets.chomp
+  new_scientist = Scientist.create({:name => s_name})
   puts "Saved!  Press return to continue."
   gets
 end
@@ -154,6 +154,17 @@ def list_scientists
     puts "#{scientist.id}: #{scientist.name}"
     puts "\n"
   end
+end
+
+def delete_scientist
+  list_scientists
+  puts "Please enter id number of scientist to delete."
+  puts "(If you enter an invalid id, nothing will be deleted)."
+  id_to_del = gets.chomp.to_i
+  s_to_destroy = Scientist.find(id_to_del)
+  s_to_destroy.destroy
+  puts "Done. Press return to continue."
+  gets
 end
 
 header
