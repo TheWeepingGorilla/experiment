@@ -1,4 +1,6 @@
 class Experiment < ActiveRecord::Base
+  has_and_belongs_to_many :scientists
+
   scope :no_start, -> { where(:start => nil)}
   scope :no_end, -> { where(:end => nil)}
 
